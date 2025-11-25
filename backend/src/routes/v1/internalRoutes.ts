@@ -7,13 +7,22 @@
  */
 
 import { Router } from 'express';
+import * as vehicleController from '@/api/v1/internal/vehicle/controller';
+import * as vehicleDetailController from '@/api/v1/internal/vehicle/detail/controller';
 
 const router = Router();
 
 /**
- * @remarks
- * Internal routes will be added here as features are implemented.
- * Examples: resource management, user operations, protected data access, etc.
+ * @rule {be-route-configuration}
+ * Vehicle listing routes
  */
+router.get('/vehicle', vehicleController.listHandler);
+router.get('/vehicle/filter-options', vehicleController.filterOptionsHandler);
+
+/**
+ * @rule {be-route-configuration}
+ * Vehicle detail routes
+ */
+router.get('/vehicle/:id', vehicleDetailController.getHandler);
 
 export default router;

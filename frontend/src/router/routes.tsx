@@ -3,11 +3,14 @@ import { createBrowserRouter } from 'react-router-dom';
 import { LoadingSpinner } from '@/core/components/loading-spinner';
 import { MainLayout } from '@/layouts/MainLayout';
 
-const HomePage = lazy(() =>
-  import('@/pages/Home').then((module) => ({ default: module.HomePage })),
+const VehicleListPage = lazy(() =>
+  import('@/pages/VehicleList').then((module) => ({ default: module.VehicleListPage }))
+);
+const VehicleDetailPage = lazy(() =>
+  import('@/pages/VehicleDetail').then((module) => ({ default: module.VehicleDetailPage }))
 );
 const NotFoundPage = lazy(() =>
-  import('@/pages/NotFound').then((module) => ({ default: module.NotFoundPage })),
+  import('@/pages/NotFound').then((module) => ({ default: module.NotFoundPage }))
 );
 
 const routes = createBrowserRouter([
@@ -16,7 +19,7 @@ const routes = createBrowserRouter([
     element: (
       <Suspense
         fallback={
-          <div className='flex h-screen w-screen items-center justify-center'>
+          <div className="flex h-screen w-screen items-center justify-center">
             <LoadingSpinner />
           </div>
         }
@@ -27,14 +30,18 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <VehicleListPage />,
+      },
+      {
+        path: 'veiculo/:id',
+        element: <VehicleDetailPage />,
       },
       {
         path: '*',
         element: (
           <Suspense
             fallback={
-              <div className='flex h-full w-full items-center justify-center'>
+              <div className="flex h-full w-full items-center justify-center">
                 <LoadingSpinner />
               </div>
             }

@@ -7,13 +7,14 @@
  */
 
 import { Router } from 'express';
+import * as contactController from '@/api/v1/external/contact/controller';
 
 const router = Router();
 
 /**
- * @remarks
- * External routes will be added here as features are implemented.
- * Examples: authentication, public data access, webhooks, etc.
+ * @rule {be-route-configuration}
+ * Contact form submission route
  */
+router.post('/contact', contactController.postHandler);
 
 export default router;
